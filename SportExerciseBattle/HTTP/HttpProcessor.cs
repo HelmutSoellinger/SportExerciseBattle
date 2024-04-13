@@ -1,7 +1,7 @@
 ﻿using System.Net.Sockets;
 using System.Text;
 
-namespace _08A3A4HttpServerDemo.HTTP
+namespace SportExerciseBattle.HTTP
 {
     public class HttpProcessor
     {

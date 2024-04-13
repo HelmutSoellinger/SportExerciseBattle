@@ -10,7 +10,7 @@ namespace SportExerciseBattle.Data_Layer
 {
     public class DatabaseConnection
     {
-        private static string _connectionString = "Host=localhost;Database=SEB_db;Username=postgres;Password=SEB_Password;Persist Security Info=True;Include Error Detail=True";
+        private static string _connectionString = "Host=localhost;Database=mydb;Username=postgres;Password=postgres;Persist Security Info=True;Include Error Detail=True";
 
         public static NpgsqlConnection GetConnection()
         {

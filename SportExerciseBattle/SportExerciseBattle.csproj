@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.26.1" />
     <PackageReference Include="Npgsql" Version="8.0.2" />
   </ItemGroup>
 

@@ -1,4 +1,4 @@
-﻿namespace _08A3A4HttpServerDemo.HTTP
+﻿namespace SportExerciseBattle.HTTP
 {
     public class HttpResponse
     {

@@ -2,7 +2,7 @@
 using System.Reflection.PortableExecutable;
 using System.Text;
 
-namespace _08A3A4HttpServerDemo.HTTP
+namespace SportExerciseBattle.HTTP
 {
     public class HttpRequest
     {

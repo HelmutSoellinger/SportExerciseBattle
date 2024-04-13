@@ -1,16 +1,19 @@
-﻿using _08A3A4HttpServerDemo.HTTP;
+﻿using SportExerciseBattle.HTTP;
 using System.Text.Json;
-using HttpMethod = _08A3A4HttpServerDemo.HTTP.HttpMethod;
+using HttpMethod = SportExerciseBattle.HTTP.HttpMethod;
+using SportExerciseBattle.DataLayer;
 
-namespace _08A3A4HttpServerDemo.SEB
+
+namespace SportExerciseBattle.SEB
 {
     public class UsersEndpoint : IHttpEndpoint
     {
+        private UserDAO userDAO = new UserDAO(); // Create an instance of UserDAO
         public bool HandleRequest(HttpRequest rq, HttpResponse rs)
         {
             if (rq.Method == HttpMethod.POST)
             {
-                CreateUser(rq, rs);
+                CreateUser(rq, rs); // Delegate the task to UserDAO
                 return true;
             }
             else if (rq.Method == HttpMethod.GET)
@@ -29,6 +32,7 @@ namespace _08A3A4HttpServerDemo.SEB
                 var user = JsonSerializer.Deserialize<User>(rq.Content ?? "");
 
                 // call BL
+                userDAO.CreateUser(rq, rs, user);
 
                 rs.ResponseCode = 201;
                 rs.ResponseMessage = "OK";

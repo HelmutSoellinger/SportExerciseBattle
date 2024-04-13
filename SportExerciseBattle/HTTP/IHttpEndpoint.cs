@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _08A3A4HttpServerDemo.HTTP
+namespace SportExerciseBattle.HTTP
 {
     public interface IHttpEndpoint
     {
