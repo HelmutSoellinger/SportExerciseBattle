@@ -2,6 +2,7 @@
 using System.Text.Json;
 using HttpMethod = SportExerciseBattle.HTTP.HttpMethod;
 using SportExerciseBattle.DataLayer;
+using System.ComponentModel.Design;
 
 
 namespace SportExerciseBattle.SEB
@@ -18,7 +19,12 @@ namespace SportExerciseBattle.SEB
             }
             else if (rq.Method == HttpMethod.GET)
             {
-                GetUsers(rq, rs);
+                GetUserData(rq, rs);
+                return true;
+            }
+            else if (rq.Method == HttpMethod.PUT)
+            {
+                UpdateUser(rq, rs);
                 return true;
             }
             return false;
@@ -31,8 +37,7 @@ namespace SportExerciseBattle.SEB
             {
                 var user = JsonSerializer.Deserialize<User>(rq.Content ?? "");
 
-                // call BL
-                userDAO.CreateUser(rq, rs, user);
+                userDAO.CreateUser(rq, rs, user); // Delegate the task to UserDAO
 
                 rs.ResponseCode = 201;
                 rs.ResponseMessage = "OK";
@@ -44,10 +49,93 @@ namespace SportExerciseBattle.SEB
             }
         }
 
-        public void GetUsers(HttpRequest rq, HttpResponse rs)
+        public void GetUserData(HttpRequest rq, HttpResponse rs)
         {
-            rs.Content = JsonSerializer.Serialize(new User[] { new User() { Username = "Max Muster", Password="1234" } });
-            rs.Headers.Add("Content-Type", "application/json");
+            try
+            {
+                // Extrahieren des Benutzernamens aus dem Pfad
+                var username = rq.Path.LastOrDefault();
+
+                // Extrahieren des Tokens aus dem Authorization-Header
+                var authHeader = rq.Headers.FirstOrDefault(h => h.Key.ToLower() == "authorization");
+                if (authHeader.Key == null || !authHeader.Value.StartsWith("Basic "))
+                {
+                    rs.ResponseCode = 401;
+                    rs.Content = "Unauthorized: Empty or Wrong Startstring";
+                    return;
+                }
+
+                var token = authHeader.Value.Substring("Basic ".Length);
+
+                // Validieren des Tokens
+                if (!TokenService.ValidateToken(token, username))
+                {
+                    rs.ResponseCode = 401;
+                    rs.Content = "Unauthorized: Wrong Token or Username";
+                    return;
+                }
+
+                // Benutzerdaten abrufen (hier als Beispiel)
+                var user = userDAO.GetUserByUsername(username);
+                if (user == null)
+                {
+                    rs.ResponseCode = 404;
+                    rs.Content = "User not found";
+                    return;
+                }
+
+                // Benutzerdaten serialisieren und zurückgeben
+                rs.Content = JsonSerializer.Serialize(user);
+                rs.Headers.Add("Content-Type", "application/json");
+                rs.ResponseCode = 200;
+            }
+            catch (Exception ex)
+            {
+                rs.ResponseCode = 500;
+                rs.Content = $"Internal server error: {ex.Message}";
+            }
+        }
+
+        public void UpdateUser(HttpRequest rq, HttpResponse rs)
+        {
+            try
+            {
+                // Extrahieren des Benutzernamens aus dem Pfad
+                var username = rq.Path.LastOrDefault();
+
+                // Extrahieren des Tokens aus dem Authorization-Header
+                var authHeader = rq.Headers.FirstOrDefault(h => h.Key.ToLower() == "authorization");
+                if (authHeader.Key == null || !authHeader.Value.StartsWith("Basic "))
+                {
+                    rs.ResponseCode = 401;
+                    rs.Content = "Unauthorized: Empty or Wrong Startstring";
+                    return;
+                }
+
+                var token = authHeader.Value.Substring("Basic ".Length);
+
+                // Validieren des Tokens
+                if (!TokenService.ValidateToken(token, username))
+                {
+                    rs.ResponseCode = 401;
+                    rs.Content = "Unauthorized: Wrong Token";
+                    return;
+                }
+
+                // Extrahieren der Benutzerdaten aus dem Request
+                var user = JsonSerializer.Deserialize<User>(rq.Content ?? "");
+
+                // Aktualisieren der Benutzerdaten (hier als Beispiel)
+                userDAO.UpdateUser(rq, rs, user, username);
+
+                rs.ResponseCode = 200;
+                rs.ResponseMessage = "OK";
+            }
+            catch (Exception ex)
+            {
+                rs.ResponseCode = 500;
+                rs.Content = $"Internal server error: {ex.Message}";
+            }
         }
     }
 }

@@ -10,11 +10,8 @@ namespace SportExerciseBattle.SEB
     {
         public string Username { get; set; } = "";
         public string Password { get; set; } = "";
-
-      /*  public User(string username, string password)
-        {
-            Username = username;
-            Password = password;
-        }*/
+        public string Bio {get; set; } = "";
+        public string Image { get; set; } = "";
+        public string Name { get; set; } = "";
     }
 }
