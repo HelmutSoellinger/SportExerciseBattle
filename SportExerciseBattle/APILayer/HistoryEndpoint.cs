@@ -5,7 +5,7 @@ using System.Text.Json;
 using HttpMethod = SportExerciseBattle.HTTP.HttpMethod;
 
 
-namespace SportExerciseBattle.BussinesLayer
+namespace SportExerciseBattle.APILayer
 {
   
         public class HistoryEndpoint : IHttpEndpoint
@@ -50,6 +50,11 @@ namespace SportExerciseBattle.BussinesLayer
                         return;
                     }
                     historyDAO.AddEntry(rq, rs, username, entry); // Delegate the task to UserDAO
+
+                    //if no tournament is running in database call StartTournament method, 
+                    //else call add entry to tournament 
+                    //(maybe nicht notwendig, weil tournament automatisch endet und 
+                    //count und winner in end tournament logik behandelt werden)
                 }
                 catch (Exception ex)
                 {

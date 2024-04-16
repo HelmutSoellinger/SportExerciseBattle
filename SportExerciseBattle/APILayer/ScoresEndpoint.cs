@@ -3,7 +3,7 @@ using System.Text.Json;
 using HttpMethod = SportExerciseBattle.HTTP.HttpMethod;
 using SportExerciseBattle.DataLayer;
 
-namespace SportExerciseBattle.BussinesLayer
+namespace SportExerciseBattle.APILayer
 {
     public class ScoresEndpoint : IHttpEndpoint
     {

@@ -1,6 +1,6 @@
 ﻿using Npgsql;
 
-namespace SportExerciseBattle.Data_Layer
+namespace SportExerciseBattle.DataLayer
 {
     public class DatabaseConnection
     {

@@ -4,7 +4,7 @@ using HttpMethod = SportExerciseBattle.HTTP.HttpMethod;
 using SportExerciseBattle.DataLayer;
 using SportExerciseBattle.Models;
 
-namespace SportExerciseBattle.BussinesLayer
+namespace SportExerciseBattle.APILayer
 {
     public class SessionsEndpoint : IHttpEndpoint
     {

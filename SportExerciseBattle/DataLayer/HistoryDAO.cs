@@ -1,5 +1,4 @@
 ﻿using Npgsql;
-using SportExerciseBattle.Data_Layer;
 using SportExerciseBattle.HTTP;
 using SportExerciseBattle.Models;
 
