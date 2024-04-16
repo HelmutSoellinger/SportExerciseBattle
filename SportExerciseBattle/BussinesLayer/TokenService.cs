@@ -1,7 +1,8 @@
 ﻿using Npgsql;
 using SportExerciseBattle.Data_Layer;
+using SportExerciseBattle.Models;
 
-namespace SportExerciseBattle.SEB
+namespace SportExerciseBattle.BussinesLayer
 {
     internal static class TokenService
     {

@@ -2,10 +2,9 @@
 using System.Text.Json;
 using HttpMethod = SportExerciseBattle.HTTP.HttpMethod;
 using SportExerciseBattle.DataLayer;
-using Npgsql;
-using SportExerciseBattle.Data_Layer;
+using SportExerciseBattle.Models;
 
-namespace SportExerciseBattle.SEB
+namespace SportExerciseBattle.BussinesLayer
 {
     public class SessionsEndpoint : IHttpEndpoint
     {

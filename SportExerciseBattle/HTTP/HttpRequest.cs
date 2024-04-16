@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection.PortableExecutable;
-using System.Text;
+﻿using System.Text;
 
 namespace SportExerciseBattle.HTTP
 {

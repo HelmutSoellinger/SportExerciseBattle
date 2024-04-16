@@ -2,10 +2,10 @@
 using System.Text.Json;
 using HttpMethod = SportExerciseBattle.HTTP.HttpMethod;
 using SportExerciseBattle.DataLayer;
-using System.ComponentModel.Design;
+using SportExerciseBattle.Models;
 
 
-namespace SportExerciseBattle.SEB
+namespace SportExerciseBattle.BussinesLayer
 {
     public class UsersEndpoint : IHttpEndpoint
     {

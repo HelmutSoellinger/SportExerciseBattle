@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
-using Npgsql;
+﻿using Npgsql;
 
 namespace SportExerciseBattle.Data_Layer
 {
@@ -20,7 +14,6 @@ namespace SportExerciseBattle.Data_Layer
             //dann connection.Open()! und new NpgsqlCommand(Command, connection);
             // command.AddWithValue("column", object.property);
             // var affectedRows = command.ExecuteNonQuery();
-
         }
     }
 }

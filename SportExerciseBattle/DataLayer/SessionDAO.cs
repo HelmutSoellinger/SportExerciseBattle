@@ -1,13 +1,7 @@
 ﻿using Npgsql;
 using SportExerciseBattle.Data_Layer;
 using SportExerciseBattle.HTTP;
-using SportExerciseBattle.SEB;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+using SportExerciseBattle.Models;
 
 namespace SportExerciseBattle.DataLayer
 {
