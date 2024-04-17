@@ -11,6 +11,7 @@ namespace SportExerciseBattle.APILayer
         public class HistoryEndpoint : IHttpEndpoint
         {
             private HistoryDAO historyDAO = new HistoryDAO(); // Create an instance of StatsDAO
+            private TournamentManager tournamentManager = new TournamentManager();
 
             public bool HandleRequest(HttpRequest rq, HttpResponse rs)
             {
@@ -50,18 +51,16 @@ namespace SportExerciseBattle.APILayer
                         return;
                     }
                     historyDAO.AddEntry(rq, rs, username, entry); // Delegate the task to UserDAO
-
-                    //if no tournament is running in database call StartTournament method, 
-                    //else call add entry to tournament 
-                    //(maybe nicht notwendig, weil tournament automatisch endet und 
-                    //count und winner in end tournament logik behandelt werden)
                 }
                 catch (Exception ex)
                 {
                     rs.ResponseCode = 500;
                     rs.Content = $"Internal server error: {ex.Message}";
                 }
-
+                if(Tournament.Instance.IsRunning == false)
+                {
+                    tournamentManager.StartTournament();  //if no tournament is currently running call StartTournament method
+                }             
                 rs.ResponseCode = 201;
                 rs.ResponseMessage = "OK";
             }
