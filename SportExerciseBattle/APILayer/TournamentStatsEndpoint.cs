@@ -1,28 +1,26 @@
-﻿using SportExerciseBattle.DataLayer;
-using SportExerciseBattle.HTTP;
-using SportExerciseBattle.Models;
+﻿using SportExerciseBattle.HTTP;
 using System.Text.Json;
 using HttpMethod = SportExerciseBattle.HTTP.HttpMethod;
-
+using SportExerciseBattle.DataLayer;
 
 namespace SportExerciseBattle.APILayer
 {
-    public class TournamentEndpoint : IHttpEndpoint
+    public class TournamentStatsEndpoint : IHttpEndpoint
     {
-        private TournamentDAO tournamentDAO = new TournamentDAO(); // Create an instance of TournamentDAO
+        private TournamentStatsDAO tournamentStatsDAO = new TournamentStatsDAO(); // Create an instance of StatsDAO
 
         public bool HandleRequest(HttpRequest rq, HttpResponse rs)
         {
             if (rq.Method == HttpMethod.GET)
             {
-                GetTournamentInfo(rq, rs, tournamentDAO); // Delegate the task to GetStats method
+                GetTournamentStats(rq, rs, tournamentStatsDAO); // Delegate the task to GetStats method
                 return true;
             }
             return false;
         }
 
 
-        public void GetTournamentInfo(HttpRequest rq, HttpResponse rs, TournamentDAO tournamentDAO)
+        public void GetTournamentStats(HttpRequest rq, HttpResponse rs, TournamentStatsDAO tournamentStatsDAO)
         {
             try
             {
@@ -46,19 +44,17 @@ namespace SportExerciseBattle.APILayer
                     return;
                 }
 
-                // Infos abrufen
-                var tournament = Tournament.Instance;
-                if (tournament.IsRunning == false) // Wenn kein Turnier läuft
+                // Statistiken abrufen
+                var stats = tournamentStatsDAO.GetTournamentStats(username);
+                if (stats == null)
                 {
                     rs.ResponseCode = 404;
-                    rs.Content = "currently none";
+                    rs.Content = "TournamentStats not found";
                     return;
                 }
 
-                // Teilnehmer und Führende in tournament schreiben, Infos serialisieren und zurückgeben
-                tournamentDAO.GetParticipants();
-                tournamentDAO.GetLeaders();
-                rs.Content = JsonSerializer.Serialize(tournament);
+                // Statistiken serialisieren und zurückgeben
+                rs.Content = JsonSerializer.Serialize(stats);
                 rs.Headers.Add("Content-Type", "application/json");
                 rs.ResponseCode = 200;
             }
@@ -70,5 +66,3 @@ namespace SportExerciseBattle.APILayer
         }
     }
 }
-
-

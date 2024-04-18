@@ -3,17 +3,17 @@ using SportExerciseBattle.Models;
 
 namespace SportExerciseBattle.DataLayer
 {
-    public class StatsDAO
+    public class TournamentStatsDAO
     {
-        public Stats GetStats(string username)
+        public TournamentStats GetTournamentStats(string username)
         {
-            Stats stats = null;
+            TournamentStats tournamentStats = null;
 
             try
             {
                 using (var connection = DatabaseConnection.GetConnection())
                 {
-                    using (var cmd = new NpgsqlCommand("SELECT username, name, elo, count FROM person WHERE username = @username", connection))
+                    using (var cmd = new NpgsqlCommand("SELECT wins, draws, losses FROM person WHERE username = @username", connection))
                     {
                         cmd.Parameters.AddWithValue("username", username);
 
@@ -21,12 +21,11 @@ namespace SportExerciseBattle.DataLayer
                         {
                             if (reader.Read())
                             {
-                                stats = new Stats
+                                tournamentStats = new TournamentStats
                                 {
-                                    Username = reader.GetString(0),
-                                    Name = reader.GetString(1),
-                                    Elo = reader.GetInt32(2),
-                                    Count = reader.GetInt32(3)
+                                    Wins = reader.GetInt32(0),
+                                    Draws = reader.GetInt32(1),
+                                    Losses = reader.GetInt32(2),
                                 };
                             }
                         }
@@ -39,7 +38,7 @@ namespace SportExerciseBattle.DataLayer
                 Console.WriteLine($"Fehler beim Abrufen der Statistiken: {ex.Message}");
             }
 
-            return stats;
+            return tournamentStats;
         }
 
         public void AddToCount(string username, int count)

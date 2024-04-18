@@ -20,6 +20,11 @@ namespace SportExerciseBattle.APILayer
                     AddEntry(rq, rs, historyDAO); // Delegate the task to AddEntry method
                     return true;
                 }
+                else if(rq.Method == HttpMethod.GET)
+            {
+                    GetEntries(rq, rs, historyDAO); // Delegate the task to GetStats method
+                    return true;
+                }
                 return false;
             }
 
@@ -70,5 +75,51 @@ namespace SportExerciseBattle.APILayer
                 rs.Content = "Failed to parse User data! ";
             }
         }
+
+        public void GetEntries(HttpRequest rq, HttpResponse rs, HistoryDAO historyDAO)
+        {
+            try
+            {
+                // Extrahieren des Tokens aus dem Authorization-Header
+                var authHeader = rq.Headers.FirstOrDefault(h => h.Key.ToLower() == "authorization");
+                if (authHeader.Key == null || !authHeader.Value.StartsWith("Basic "))
+                {
+                    rs.ResponseCode = 401;
+                    rs.Content = "Unauthorized";
+                    return;
+                }
+
+                var token = authHeader.Value.Substring("Basic ".Length);
+                var username = token.Split("-")[0]; // Extrahieren des Benutzernamens aus dem Token
+
+                // Validieren des Tokens
+                if (!TokenService.ValidateToken(token, username))
+                {
+                    rs.ResponseCode = 401;
+                    rs.Content = "Unauthorized";
+                    return;
+                }
+
+                // Einträge abrufen
+                var entriesList = historyDAO.GetEntries(username);
+                if (entriesList == null || entriesList.Count == 0)
+                {
+                    rs.ResponseCode = 404;
+                    rs.Content = "currently empty";
+                    return;
+                }
+
+                // Statistiken serialisieren und zurückgeben
+                rs.Content = JsonSerializer.Serialize(entriesList);
+                rs.Headers.Add("Content-Type", "application/json");
+                rs.ResponseCode = 200;
+            }
+            catch (Exception ex)
+            {
+                rs.ResponseCode = 500;
+                rs.Content = $"Internal server error: {ex.Message}";
+            }
+        }
     }
 }
+

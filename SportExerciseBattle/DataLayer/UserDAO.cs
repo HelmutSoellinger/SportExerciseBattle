@@ -15,7 +15,7 @@ namespace SportExerciseBattle.DataLayer
 
                 using (var connection = DatabaseConnection.GetConnection())
                 {
-                    using (var cmd = new NpgsqlCommand(@"INSERT INTO ""person""(username, password, name) VALUES (@username, @password)", connection))
+                    using (var cmd = new NpgsqlCommand(@"INSERT INTO ""person""(username, password, name) VALUES (@username, @password, @name)", connection))
                     {
                         cmd.Parameters.AddWithValue("username", user.Username);
                         cmd.Parameters.AddWithValue("password", user.Password); // Consider hashing the password before storing

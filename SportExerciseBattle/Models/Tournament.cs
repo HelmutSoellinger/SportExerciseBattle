@@ -13,9 +13,9 @@ namespace SportExerciseBattle.Models
         private Tournament() { }
         public static Tournament Instance => LazyInstance.Value;
         public bool IsRunning { get; set; } = false;
-        public DateTime StartTime { get; set; }
-        public string LeadingUser { get; set; } = "";
         public List<string> Participants { get; set; } = new List<string>();
+        public List<string> LeadingUsers { get; set; } = new List<string>();
+        public DateTime StartTime { get; set; }
     }
     //turn into an singleton, unique feature maybe counting wins draws and loses and tournament record for each user
 }

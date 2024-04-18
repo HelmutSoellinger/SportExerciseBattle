@@ -30,11 +30,16 @@ public class TournamentManager
         tournamentTimer.Stop();
         tournament.IsRunning = false;
         CalculateWinnerAndUpdateElo();
+        // Reset the tournament singleton for the next tournament.
+        tournament.LeadingUsers.Clear();
+        tournament.Participants.Clear();
     }
 
     private void CalculateWinnerAndUpdateElo()
     {
-        tournamentDAO.GetLeader();
+        tournamentDAO.GetParticipants();
+        tournamentDAO.GetLeaders();
         tournamentDAO.UpdateElo();
+        tournamentDAO.UpdateTournamentStats();
     }
 }
