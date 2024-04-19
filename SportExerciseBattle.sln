@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportExerciseBattle", "SportExerciseBattle\SportExerciseBattle.csproj", "{2EB72976-B799-43A9-A061-4610462A7EEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportExerciseBattle", "SportExerciseBattle\SportExerciseBattle.csproj", "{2EB72976-B799-43A9-A061-4610462A7EEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnitTestsForSEB", "NUnitTestsForSEB\NUnitTestsForSEB.csproj", "{3DBFA332-654F-4F4B-B88D-3B41FB7CB2D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{2EB72976-B799-43A9-A061-4610462A7EEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EB72976-B799-43A9-A061-4610462A7EEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EB72976-B799-43A9-A061-4610462A7EEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DBFA332-654F-4F4B-B88D-3B41FB7CB2D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DBFA332-654F-4F4B-B88D-3B41FB7CB2D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DBFA332-654F-4F4B-B88D-3B41FB7CB2D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DBFA332-654F-4F4B-B88D-3B41FB7CB2D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

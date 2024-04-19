@@ -4,7 +4,7 @@ using SportExerciseBattle.Models;
 
 namespace SportExerciseBattle.APILayer
 {
-    internal static class TokenService
+    public static class TokenService
     {
 
         public static void GenerateToken(User? loginRequest)

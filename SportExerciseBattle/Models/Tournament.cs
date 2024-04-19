@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace SportExerciseBattle.Models
 {
     public class Tournament
@@ -15,7 +10,8 @@ namespace SportExerciseBattle.Models
         public bool IsRunning { get; set; } = false;
         public List<string> Participants { get; set; } = new List<string>();
         public List<string> LeadingUsers { get; set; } = new List<string>();
-        public DateTime StartTime { get; set; }
+        public DateTime StartTime { get; set; } = DateTime.MinValue;
+        public List<string> Log { get; set; } = new List<string>();
     }
     //turn into an singleton, unique feature maybe counting wins draws and loses and tournament record for each user
 }

@@ -75,7 +75,7 @@ namespace SportExerciseBattle.APILayer
                     return;
                 }
 
-                // Benutzerdaten abrufen (hier als Beispiel)
+                // Benutzerdaten abrufen
                 var user = userDAO.GetUserByUsername(username);
                 if (user == null)
                 {
@@ -125,7 +125,7 @@ namespace SportExerciseBattle.APILayer
                 // Extrahieren der Benutzerdaten aus dem Request
                 var user = JsonSerializer.Deserialize<User>(rq.Content ?? "");
 
-                // Aktualisieren der Benutzerdaten (hier als Beispiel)
+                // Aktualisieren der Benutzerdaten
                 userDAO.UpdateUser(rq, rs, user, username);
 
                 rs.ResponseCode = 200;

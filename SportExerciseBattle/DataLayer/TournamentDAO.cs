@@ -114,6 +114,7 @@ namespace SportExerciseBattle.DataLayer
                             if (affectedRows > 0)
                             {
                                 Console.WriteLine("Elo updated successfully for draw scenario.");
+                                tournament.Log.Add(String.Join(", ", tournament.LeadingUsers) + " are the glories Winners");
                             }
                             else
                             {
@@ -138,6 +139,8 @@ namespace SportExerciseBattle.DataLayer
                                 if (affectedRows > 0)
                                 {
                                     Console.WriteLine("Elo updated successfully");
+                                    tournament.Log.Add(String.Join(", ", tournament.LeadingUsers) + " is the sole Victor!");
+
                                 }
                                 else
                                 {
@@ -173,6 +176,7 @@ namespace SportExerciseBattle.DataLayer
                             if (affectedRows > 0)
                             {
                                 Console.WriteLine("TournamentStats updated successfully for draw scenario.");
+
                             }
                             else
                             {

@@ -64,8 +64,15 @@ namespace SportExerciseBattle.APILayer
                 }
                 if(Tournament.Instance.IsRunning == false)
                 {
+                    var tournament = Tournament.Instance;
                     tournamentManager.StartTournament();  //if no tournament is currently running call StartTournament method
-                }             
+                    tournament.Log.Add(tournament.StartTime + "Arena is open! Join the fight quickly!"); //add the start to the tournament log
+                } 
+                else
+                {
+                    var tournament = Tournament.Instance;
+                    tournament.Log.Add(DateTime.Now + "Challenge accepted! A Competitor(Entry) joined the tournament"); //add the entry to the tournament log
+                }
                 rs.ResponseCode = 201;
                 rs.ResponseMessage = "OK";
             }
